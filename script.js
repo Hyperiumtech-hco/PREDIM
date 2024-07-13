@@ -1,5 +1,4 @@
-// app.js
-
+//code de puri
 document.addEventListener("DOMContentLoaded", function() {
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
@@ -53,18 +52,33 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   
-    // Función para dibujar un rectángulo
-    const drawRect = (rect) => {
-      ctx.beginPath();
-      ctx.rect(rect.x, rect.y, rect.width, rect.height);
-      ctx.lineWidth = rect.brushWidth;
-      ctx.strokeStyle = rect.color;
-      ctx.stroke();
-      if (rect.fill) {
-        ctx.fillStyle = rect.color;
-        ctx.fill();
-      }
-    };
+  // Función para dibujar un rectángulo
+const drawRect = (rect) => {
+    ctx.beginPath();
+    ctx.rect(rect.x, rect.y, rect.width, rect.height);
+    ctx.lineWidth = rect.brushWidth;
+    ctx.strokeStyle = rect.color;
+    ctx.stroke();
+    if (rect.fill) {
+      ctx.fillStyle = rect.color;
+      ctx.fill();
+    }
+  
+    // Calcular el área en centímetros cuadrados
+    const pixelToCm = 2.54 / (window.devicePixelRatio * 96);
+    const areaCm2 = (rect.width * pixelToCm * rect.height * pixelToCm / 2).toFixed(2); // Calcular el área como base por altura sobre 2 y convertir a cm²
+    const areaText = `Área: ${areaCm2} cm²`;
+  
+    // Mostrar el área en una posición ajustada dentro del rectángulo dibujado
+    const textWidth = ctx.measureText(areaText).width; //Obtener el ancho del texto
+    const textX = rect.x + rect.width / 2 - textWidth / 2; //Centrar horizontalmente
+    const textY = rect.y + rect.height / 2; //Centrar verticalmente
+    ctx.fillStyle = "black";
+    ctx.font = "12px Arial";
+    ctx.textAlign = "left"; // Alinear a la izquierda para ajustar horizontalmente
+    ctx.textBaseline = "middle";
+    ctx.fillText(areaText, textX, textY);
+  };
   
     // Función para redibujar todos los rectángulos
     const redrawRectangles = () => {
@@ -76,28 +90,28 @@ document.addEventListener("DOMContentLoaded", function() {
       });
       drawAllLegends(); // Redibujar todas las leyendas
     };
-  // Función para dibujar todas las leyendas
-  const drawAllLegends = () => {
-    const padding = 5;
-    const textHeight = 14;
-    const lineSpacing = 5;
-    const totalHeight = (textHeight + lineSpacing) * rectangles.length;
-    const x = canvas.width - 275 - padding;
-    const y = canvas.height - totalHeight - padding;
-
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
-    ctx.fillRect(x - padding, y - padding, 275, totalHeight + padding * 2);
-
-    ctx.fillStyle = 'white';
-    ctx.font = '12px Arial';
-    rectangles.forEach((rect, index) => {
-        const textY = y + (index + 1) * (textHeight + lineSpacing);
-        const pixelToCm = 2.54 / (window.devicePixelRatio * 96);
-        const areaCm2 = (rect.width * pixelToCm * rect.height * pixelToCm / 2).toFixed(2); // Calcular el área como base por altura sobre 2 y convertir a cm²
-        ctx.fillText(`${rect.dimensions}, Área: ${areaCm2} cm²`, x, textY);
-    });
-};
-
+  
+    // Función para dibujar todas las leyendas
+    const drawAllLegends = () => {
+      const padding = 5;
+      const textHeight = 14;
+      const lineSpacing = 5;
+      const totalHeight = (textHeight + lineSpacing) * rectangles.length;
+      const x = canvas.width - 275 - padding;
+      const y = canvas.height - totalHeight - padding;
+  
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+      ctx.fillRect(x - padding, y - padding, 275, totalHeight + padding * 2);
+  
+      ctx.fillStyle = 'white';
+      ctx.font = '12px Arial';
+      rectangles.forEach((rect, index) => {
+          const textY = y + (index + 1) * (textHeight + lineSpacing);
+          const pixelToCm = 2.54 / (window.devicePixelRatio * 96);
+          const areaCm2 = (rect.width * pixelToCm * rect.height * pixelToCm / 2).toFixed(2); // Calcular el área como base por altura sobre 2 y convertir a cm²
+          ctx.fillText(`${rect.dimensions}, Área: ${areaCm2} cm²`, x, textY);
+      });
+    };
   
     // Event listener para dibujar rectángulos
     canvas.addEventListener("mousedown", (e) => {
@@ -147,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function() {
           color: selectedColor,
           brushWidth: brushWidth,
           fill: fillColor.checked,
-          dimensions: `Width: ${widthCm.toFixed(2)} cm, Height: ${heightCm.toFixed(2)} cm`
+          dimensions: `Ancho: ${widthCm.toFixed(2)} cm, Alto: ${heightCm.toFixed(2)} cm`
         };
         rectangles.push(newRect);
   
@@ -225,4 +239,3 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   
   });
-  
