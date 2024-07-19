@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const ctx = canvas.getContext("2d");
   const legend = document.getElementById("legend");
   const colorPicker = document.getElementById("color-picker");
+  const circle = document.getElementById(circle);
+  const el = document.getElementById(el);
+  const ty = document.getElementById(ty);
 
   let prevMouseX, prevMouseY, isDrawing = false, snapshot, selectedTool = "brush", brushWidth = 5, selectedColor = "#000";
   let fillColor = { checked: false };
@@ -54,7 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
   });
 
-
   // Función para dibujar un rectángulo
   const drawRect = (rect) => {
       ctx.beginPath();
@@ -66,22 +68,24 @@ document.addEventListener("DOMContentLoaded", function () {
           ctx.fillStyle = rect.color;
           ctx.fill();
       }
+      
 
       // Calcular el área en centímetros cuadrados
       const scale = 0.02; // Escala 1:50
       const dpi = 96; // Asumiendo 96 DPI
       const pixelToCm = (2.54 / dpi) / (113 * scale);
-      // const pixelToCm = 2.54 / (window.devicePixelRatio * 96);
-      // const areaCm2 = ((rect.width * pixelToCm * rect.height * pixelToCm) / 2).toFixed(2); // Calcular el área como base por altura sobre 2 y convertir a cm²
 
       // Supongamos que rect.width y rect.height son las dimensiones del rectángulo en píxeles
       const baseCm = rect.width * pixelToCm;
       const alturaCm = rect.height * pixelToCm;
       const areaCm2 = baseCm * alturaCm;
-      const areaText = `Área: ${areaCm2.toFixed(2)} m²`;
+      const areaText = `At: ${areaCm2.toFixed(2)} m²`;
       const npisos = document.getElementById("npisos").value;
       const Ac = ((parseFloat(areaCm2) * parseFloat(npisos) * 1000) / (0.45 * 210)).toFixed(2);
-      const areaTextAC = `AC: ${Ac} m²`;
+      const areaTextAC = `Ac: ${Ac} cm²`;
+
+      //Funcion para el btn circle
+      
       // Mostrar el área en una posición ajustada dentro del rectángulo dibujado
       const textWidth = ctx.measureText(areaText).width; //Obtener el ancho del texto
       const textX = rect.x + rect.width / 2 - textWidth / 2; //Centrar horizontalmente
@@ -94,12 +98,13 @@ document.addEventListener("DOMContentLoaded", function () {
       ctx.fillText(areaTextAC, textX, textY + 10);
   };
 
+
   // Función para redibujar todos los rectángulos
   const redrawRectangles = () => {
       if (pdfSnapshot) {
           ctx.putImageData(pdfSnapshot, 0, 0);
       }
-      rectangles.forEach((rect, index) => {
+      rectangles.forEach((rect) => {
           drawRect(rect);
       });
       drawAllLegends(); // Redibujar todas las leyendas
