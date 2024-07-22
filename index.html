@@ -1,365 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Proyecto Pavco</title>
-    <!-- Bootstrap CSS link -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.min.css"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
 
-  <body>
+<body>
     <style>
-      /* Static Section (.col-md-12) */
-      .col-md-12 {
-        height: 150px;
-        /* Set a fixed height for static behavior */
-        overflow: hidden;
-        /* Hide any content that overflows */
-      }
+        /* Static Section (.col-md-12) */
+        .col-md-12 {
+            height: 150px;
+            /* Set a fixed height for static behavior */
+            overflow: hidden;
+            /* Hide any content that overflows */
+        }
 
-      /* Scrollable Section (.drawing-board.col-md-12) */
-      .drawing-board.col-md-12 {
-        height: 500px;
-        /* Set a desired height for the scrollable area */
-        width: 600px;
-        overflow-y: auto;
-        /* Enable vertical scrolling */
-        overflow-x: auto;
-      }
+        /* Scrollable Section (.drawing-board.col-md-12) */
+        .drawing-board.col-md-12 {
+            height: 500px;
+            /* Set a desired height for the scrollable area */
+            width: 600px;
+            overflow-y: auto;
+            /* Enable vertical scrolling */
+            overflow-x: auto;
+        }
     </style>
     <div class="content-wrapper">
-      <div class="container-fluid">
-        <div class="row">
-          <section class="col-md-12">
-            <div class="card">
-              <div class="card-header p-2">
-                <ul class="nav nav-tabs">
-                  <li class="nav-item">
-                    <a class="nav-link active" href="#archivo" data-toggle="tab"
-                      ><i class="ri-file-add-line"></i>Archivo</a
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#herramientas" data-toggle="tab"
-                      ><i class="ri-bar-chart-horizontal-fill"></i
-                        >Columnas</a
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#vigas" data-toggle="tab"
-                      ><i class="ri-layout-masonry-line"></i
-                        >Vigas</a
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#zapata" data-toggle="tab"
-                      ><i class="ri-layout-grid-2-line"></i
-                        >Zapata</a
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#lozas" data-toggle="tab"
-                      ><i class="ri-inbox-2-line"></i>
-                      Lozas</a
-                    >
-                  </li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <div class="tab-content">
-                  <div class="active tab-pane" id="archivo">
-                    <div class="row">
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12 py-2">
-                        <div
-                          class="card"
-                          style="margin-left: -1.2rem; margin-top: -1.7rem"
-                        >
-                          <div class="card-body d-flex justify-content-around">
-                            <button class="btn create-new">
-                              <i class="ri-file-pdf-2-line"></i> Nuevo
-                            </button>
-                            <button class="btn save-img">
-                              <i class="ri-save-line"></i> Guardar
-                            </button>
-                            <button class="btn clear-canvas">
-                              <i class="ri-delete-bin-6-line"></i> Eliminar
-                            </button>
-                            <div class="dropup">
-                              <label for="upload-pdf" class="btn upload-label">
-                                <i class="ri-chat-upload-line"></i> Cargar
-                              </label>
-                              <input
-                                type="file"
-                                id="upload-pdf"
-                                accept=".pdf"
-                                style="display: none"
-                              />
+        <div class="container-fluid">
+            <div class="row">
+                <section class="col-md-12">
+                    <div class="card">
+                        <div class="card-header p-2">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#archivo" data-toggle="tab"><i
+                                            class="ri-file-add-line"></i>Archivo</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#columnas" data-toggle="tab"><i
+                                            class="ri-dashboard-horizontal-line"></i>Columnas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#ajustes" data-toggle="tab"><i
+                                            class="ri-settings-5-fill"></i>Ajustes</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="active tab-pane" id="archivo">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-12 py-2">
+                                            <div class="card" style="margin-left: -1.2rem; margin-top: -1.7rem;">
+                                                <div class="card-body d-flex justify-content-around">
+                                                    <button class="btn create-new">
+                                                        <i class="ri-file-pdf-2-line"></i> Nuevo
+                                                    </button>
+                                                    <button class="btn save-img">
+                                                        <i class="ri-save-line"></i> Guardar
+                                                    </button>
+                                                    <button class="btn clear-canvas">
+                                                        <i class="ri-delete-bin-6-line"></i> Eliminar
+                                                    </button>
+                                                    <div class="">
+                                                        <label for="upload-pdf" class="btn upload-label">
+                                                            <i class="ri-chat-upload-line"></i> Cargar
+                                                        </label>
+                                                        <input type="file" id="upload-pdf" accept=".pdf"
+                                                            style="display: none" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- secciones por definir -->
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-12 py-2">
+
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-12 py-2">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="columnas">
+                                    <div class="row">
+                                        <!-- seccion herramientas -->
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-12"
+                                            style="margin-top: -1.2rem; margin-left: -1.2rem; font-size: x-small;">
+                                            <div class="card d-flex justify-content-around">
+                                                <div class="col-12">
+                                                    <div class="card" style="width: 18rem; border-radius: 20px;">
+                                                        <div class="card-body">
+                                                            <p class="card-text"
+                                                                style="position: absolute; top: 0; right: 0; background-color: #f8f9fa; padding: 0.5rem;">
+                                                                Predimenci</p>
+                                                            <div class="body">
+                                                                <div class="row">
+                                                                    <div class="col-2">
+                                                                        <button class="btn btn-sm tool"
+                                                                            data-tool="rectangle" title="Rectángulo">
+                                                                            <i class="ri-rectangle-line"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <button class="btn btn-sm tool"
+                                                                            data-tool="cuadrado" title="Cuadrado">
+                                                                            <i class="ri-square-line"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                        <button class="btn btn-sm tool"
+                                                                            data-tool="circulo" title="Circulo">
+                                                                            <i class="ri-circle-line"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="col-2">
+                                                                      <button class="btn btn-sm tool"
+                                                                          data-tool="te" title="Te">
+                                                                          <i class="ri-t-box-line"></i>
+                                                                      </button>
+                                                                  </div>
+                                                                  <div class="col-2">
+                                                                    <button class="btn btn-sm tool"
+                                                                        data-tool="ele" title="Ele">
+                                                                        <i class="ri-ruler-2-line"></i>
+                                                                    </button>
+                                                                  </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- seccion colores y tamaño -->
+                                            <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                                                <div class="card d-flex justify-content-around">
+                                                    <div class="col-12">
+                                                        <div class="body">
+                                                            <div class="row">
+                                                                <div class="col-2">
+                                                                    <button type="button" class="btn dropdown-toggle"
+                                                                        data-toggle="dropdown">
+                                                                        <i class="ri-list-unordered"></i>
+                                                                    </button>
+                                                                    <div class="dropdown-menu">
+                                                                        <input type="range" id="size-slider"
+                                                                            class="custom-range mt-3" min="1" max="30"
+                                                                            value="5" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <label for="color-picker"
+                                                                        style="margin-top: 0.5rem;"><i
+                                                                            class="ri-palette-line"></i></label>
+                                                                    <input type="color" id="color-picker"
+                                                                        class="form-control" value="#000000"
+                                                                        style="display: none;" />
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- seccion entradas -->
+                                            <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                                                <div class="d-flex justify-content-around">
+                                                    <div class="form-group row">
+                                                        <label for="proyecto_name"
+                                                            class="col-sm-6 col-form-label">Cantidad
+                                                            de pisos</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="number" id="npisos" class="form-control"
+                                                                value="1" min="1" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- seccion datos extras-leyendas -->
+                                            <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+                                                <div class="card">
+                                                    <div id="legend"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="ajustes"></div>
+                                </div>
                             </div>
-                          </div>
                         </div>
-                      </div>
+                </section>
 
-                      <!-- secciones por definir -->
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12 py-2"></div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12"></div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12 py-2"></div>
-                    </div>
-                  </div>
-                  <!--Col para vigas----->
-                  <div class="tab-pane" id="vigas">
-                    <div class="row">
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12 py-2">
-                        <div
-                          class="card"
-                          style="margin-left: -1.2rem; margin-top: -1.7rem"
-                        >
-                          <div class="card-body d-flex justify-content-around">
-                            <button class="btn create-new">
-                              <i class="ri-file-pdf-2-line"></i> Nuevo
-                            </button>
-                            <button class="btn save-img">
-                              <i class="ri-save-line"></i> Guardar
-                            </button>
-                            <button class="btn clear-canvas">
-                              <i class="ri-delete-bin-6-line"></i> Eliminar
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- secciones por definir -->
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12 py-2"></div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12"></div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12 py-2"></div>
-                    </div>
-                  </div>
-                  <!----Termina aqui vigas-->
-
-                  <!---Comienza Zapata-->
-                  <div class="tab-pane" id="zapata">
-                    <div class="row">
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12 py-2">
-                        <div
-                          class="card"
-                          style="margin-left: -1.2rem; margin-top: -1.7rem"
-                        >
-                          <div class="card-body d-flex justify-content-around">
-                            <button class="btn create-new">
-                              <i class="ri-file-pdf-2-line"></i> Nuevo
-                            </button>
-                            <button class="btn save-img">
-                              <i class="ri-save-line"></i> Guardar
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- secciones por definir -->
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12 py-2"></div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12"></div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12 py-2"></div>
-                    </div>
-                  </div>
-                  <!----Termina zapata-->
-
-                  <!---Aqui empieza Lozas-->
-                  <div class="tab-pane" id="lozas">
-                    <div class="row">
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12 py-2">
-                        <div
-                          class="card"
-                          style="margin-left: -1.2rem; margin-top: -1.7rem"
-                        >
-                          <div class="card-body d-flex justify-content-around">
-                            <button class="btn create-new">
-                              <i class="ri-file-pdf-2-line"></i> Nuevo
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- secciones por definir -->
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12 py-2"></div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12"></div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12 py-2"></div>
-                    </div>
-                  </div>
-                  <!---Aqui termina Loza-->
-
-                  <div class="tab-pane" id="herramientas">
-                    <div class="row">
-                      <!-- seccion herramientas -->
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                        <div class="card d-flex justify-content-around">
-                          <div class="col-12">
-                            <div class="body">
-                              <div class="row">
-                                <div class="col-2">
-                                  <button
-                                    class="btn btn-sm tool rectangulo"
-                                    id="rectangle"
-                                    title="Rectángulo"
-                                  >
-                                    <i class="ri-rectangle-line"></i>
-                                  </button>
-                                </div>
-
-                                <div class="col-2">
-                                  <button
-                                    class="btn btn-sm tool borrador"
-                                    id="borrador"
-                                    title="borrador"
-                                  >
-                                    <i class="ri-eraser-line"></i>
-                                  </button>
-                                </div>
-                                <div class="col-2">
-                                  <button
-                                    class="btn btn-sm tool cuadrado"
-                                    id="cuadrado"
-                                    title="Cuadrado"
-                                  >
-                                    <i class="ri-square-line"></i>
-                                  </button>
-                                </div>
-                                <div class="col-2">
-                                  <button
-                                    class="btn btn-sm tool"
-                                    id="circle"
-                                    title="Circulo"
-                                  >
-                                    <i class="ri-circle-line"></i>
-                                  </button>
-                                </div>
-                                <div class="col-2">
-                                  <button
-                                    class="btn btn-sm tool"
-                                    id="ty"
-                                    title="Te"
-                                  >
-                                  <i class="ri-tumblr-fill"></i>
-                                  </button>
-                                </div>
-                                <div class="col-2">
-                                  <button
-                                    class="btn btn-sm tool"
-                                    id="el"
-                                    title="Ele"
-                                  >
-                                  <i class="ri-delete-column"></i>
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- seccion colores y tamaño -->
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                        <div class="card d-flex justify-content-around">
-                          <div class="col-12">
-                            <div class="body">
-                              <div class="row">
-                                <div class="col-2 dropup">
-                                  <button
-                                    type="button"
-                                    class="btn dropdown-toggle"
-                                    data-toggle="dropdown"
-                                  >
-                                    <i class="ri-list-unordered"></i>
-                                  </button>
-                                  <div class="dropdown-menu dropdown-menu-end">
-                                    <input
-                                      type="range"
-                                      id="size-slider"
-                                      class="custom-range mt-0"
-                                      min="1"
-                                      max="10"
-                                      value="1"
-                                    />
-                                  </div>
-                                </div>
-                                <div class="col-2 position">
-                                  <label
-                                    for="color-picker"
-                                    style="margin-top: 0.5rem"
-                                    ><i class="ri-palette-line"></i
-                                  ></label>
-                                  <input
-                                    type="color"
-                                    id="color-picker"
-                                    class="form-control"
-                                    value="#000000"
-                                    style="display: none"
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- seccion entradas -->
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                        <div class="d-flex justify-content-around">
-                          <div class="form-group row">
-                            <label
-                              for="proyecto_name"
-                              class="col-sm-6 col-form-label"
-                              >Cantidad de pisos</label
-                            >
-                            <div class="col-sm-6">
-                              <input
-                                type="number"
-                                id="npisos"
-                                class="form-control"
-                                value="1"
-                                min="1"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- seccion datos extras-leyendas -->
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                        <div class="card">
-                          <div id="legend"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="tab-pane" id="ajustes"></div>
-                </div>
-              </div>
+                <section class="drawing-board col-md-12">
+                    <canvas id="canvas" class="border"></canvas>
+                </section>
             </div>
-          </section>
-
-          <section class="drawing-board col-md-12">
-            <div
-              class="card"
-              style="align-items: center"
-              id="contenedor_message"
-            >
-              <h2>Sube tu plano en formato .pdf</h2>
-              <p><strong>Escala :</strong> 1/50</p>
-              <p><strong>Tipo de Hoja :</strong> A1</p>
-            </div>
-            <!-- Exportar pdf en la misma escala pero el hoja A4 -->
-            <canvas id="canvas" class="border"></canvas>
-          </section>
         </div>
-      </div>
     </div>
+
     <!-- Bootstrap JS y dependencias opcionales -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -367,7 +220,7 @@
     <!-- PDF.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <!-- Tu archivo JavaScript personalizado -->
-    <!-- <script src="script.js"></script> -->
-    <script src="pre.js"></script>
-  </body>
-</html>
+    <script src="app.js"></script>
+</body>
+
+</html> 
