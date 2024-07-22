@@ -276,7 +276,7 @@ JAVASCRIPT:document.addEventListener("DOMContentLoaded", function () {
                 const Ac = ((parseFloat(areaCm2) * parseFloat(npisos) * 1000) / (0.45 * 210)).toFixed(2);
                 const areaText = `AT: ${areaCm2.toFixed(2)} m²`;
                 const areaTextAC = `AC: ${Ac} cm²`;
-                const areaT = `A⫟: ${Ac - 900 / 60} m²`;
+                const areaT = `A⫟: ${(Ac - 900 / 60).toFixed(2)} m²`;
                 const textY = square.y + square.height / 2;
                 const textX = square.x + square.width / 2 - ctx.measureText(areaText).width / 2;
     
@@ -318,7 +318,7 @@ JAVASCRIPT:document.addEventListener("DOMContentLoaded", function () {
             const Ac = ((parseFloat(areaCm2) * parseFloat(npisos) * 1000) / (0.45 * 210)).toFixed(2);
             const areaText = `AT: ${areaCm2.toFixed(2)} m²`;
             const areaTextAC = `AC: ${Ac} cm²`;
-            const AreaEle = `AEle: ${Ac - 900 / 60} m²`;
+            const AreaEle = `AL: ${(Ac - 900 / 60).toFixed(2)} m²`;
             const textY = square.y + square.height / 2;
             const textX = square.x + square.width / 2 - ctx.measureText(areaText).width / 2;
             this.drawText(square, areaText, areaTextAC, textY);
