@@ -157,8 +157,7 @@ JAVASCRIPT:document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    //Clase Cuadrado y operacion
-    // Clase Cuadrado y operación
+    //Clase Cuadrado y operacionn
     class CuadradoTool extends Tool {
     draw(e) {
         if (!isDrawing) return;
@@ -328,50 +327,96 @@ JAVASCRIPT:document.addEventListener("DOMContentLoaded", function () {
     }
 
     //Secciona de vigas (class cuadrado) Clase CuadradoVigasTool y operación
-    // 
     class CuadradoVigasTool extends Tool {
-    draw(e) {
-        if (!isDrawing) return;
-        ctx.putImageData(snapshot, 0, 0);
-        const shape = {
-            x: prevMouseX,
-            y: prevMouseY,
-            width: e.offsetX - prevMouseX,
-            height: e.offsetY - prevMouseY,
-            color: this.selectedColor,
-            brushWidth: this.brushWidth,
-            fill: this.fillColor.checked
-        };
-        this.drawCuadradoVigas(shape);
-    }
-
-    drawCuadradoVigas(square) {
-        ctx.beginPath();
-        ctx.rect(square.x, square.y, square.width, square.height);
-        ctx.lineWidth = square.brushWidth;
-        ctx.strokeStyle = square.color;
-        ctx.stroke();
-        if (square.fill) {
-            ctx.fillStyle = square.color;
-            ctx.fill();
+        draw(e) {
+            if (!isDrawing) return;
+            ctx.putImageData(snapshot, 0, 0);
+            const shape = {
+                x: prevMouseX,
+                y: prevMouseY,
+                width: e.offsetX - prevMouseX,
+                height: e.offsetY - prevMouseY,
+                color: this.selectedColor,
+                brushWidth: this.brushWidth,
+                fill: this.fillColor.checked
+            };
+            this.drawCuadradoVigas(shape);
+        }
+    
+        drawCuadradoVigas(square) {
+            ctx.beginPath();
+            ctx.rect(square.x, square.y, square.width, square.height);
+            ctx.lineWidth = square.brushWidth;
+            ctx.strokeStyle = square.color;
+            ctx.stroke();
+            if (square.fill) {
+                ctx.fillStyle = square.color;
+                ctx.fill();
+            }
+    
+            const areaCm2 = this.calculateArea(square);
+            const npisos = npisosInput.value;
+            const Ac = ((parseFloat(areaCm2) * parseFloat(npisos) * 1000) / (0.45 * 210)).toFixed(2);
+            const areaText = `AT: ${areaCm2.toFixed(2)} m²`;
+            const areaTextAC = `AC: ${Ac} cm²`;
+            const AreaVigas = (Math.max(square.width, square.height) / 14).toFixed(2);
+            const AreaCuadradoVigas = `L: ${AreaVigas} m²`;
+            const textY = square.y + square.height / 2;
+            const textX = square.x + square.width / 2 - ctx.measureText(areaText).width / 2;
+    
+            this.drawText(square, areaText, areaTextAC, textY);
+            ctx.fillText(AreaCuadradoVigas, textX, textY + 20);
+        }
         }
 
-        const areaCm2 = this.calculateArea(square);
-        const npisos = npisosInput.value;
-        const Ac = ((parseFloat(areaCm2) * parseFloat(npisos) * 1000) / (0.45 * 210)).toFixed(2);
-        const areaText = `AT: ${areaCm2.toFixed(2)} m²`;
-        const areaTextAC = `AC: ${Ac} cm²`;
-        const AreaEle = `AL: ${(Ac - 900 / 60).toFixed(2)} m²`;
-        const AreaVigas = (Math.max(square.width, square.height) / 14).toFixed(2);
-        const AreaCuadradoVigas = `L: ${AreaVigas} m²`;
-        const textY = square.y + square.height / 2;
-        const textX = square.x + square.width / 2 - ctx.measureText(areaText).width / 2;
+    //Seccion de pestaña zapata y operacion
+    class CuadradoZapataTool extends Tool {
+        draw(e) {
+            if (!isDrawing) return;
+            ctx.putImageData(snapshot, 0, 0);
+            const shape = {
+                x: prevMouseX,
+                y: prevMouseY,
+                width: e.offsetX - prevMouseX,
+                height: e.offsetY - prevMouseY,
+                color: this.selectedColor,
+                brushWidth: this.brushWidth,
+                fill: this.fillColor.checked
+            };
+            this.drawCuadradoZapata(shape);
+        }
+    
+        drawCuadradoZapata(square) {
+            ctx.beginPath();
+            ctx.rect(square.x, square.y, square.width, square.height);
+            ctx.lineWidth = square.brushWidth;
+            ctx.strokeStyle = square.color;
+            ctx.stroke();
+            if (square.fill) {
+                ctx.fillStyle = square.color;
+                ctx.fill();
+            }
+    
+            const areaCm2 = this.calculateArea(square);
+            const npisos = npisosInput.value;
+            const Ac = ((parseFloat(areaCm2) * parseFloat(npisos) * 1000) / (0.45 * 210)).toFixed(2);
+            const areaText = `AT: ${areaCm2.toFixed(2)} m²`;
+            const areaTextAC = `AC: ${Ac} cm²`;
+            const AreaEle = `AL: ${(Ac - 900 / 60).toFixed(2)} m²`;
+            const AreaVigas = (Math.max(square.width, square.height) / 14).toFixed(2);
+            const AreaCuadradoVigas = `L: ${AreaVigas} m²`;
+            
+            const textY = square.y + square.height / 2;
+            const textX = square.x + square.width / 2 - ctx.measureText(areaText).width / 2;
+    
+            this.drawText(square, areaText, areaTextAC, textY);
+            ctx.fillText(AreaEle, textX, textY + 20);
+            ctx.fillText(AreaCuadradoVigas, textX, textY + 30);
+        }
+        }
+    
 
-        this.drawText(square, areaText, areaTextAC, textY);
-        ctx.fillText(AreaEle, textX, textY + 20);
-        ctx.fillText(AreaCuadradoVigas, textX, textY + 30);
-    }
-    }
+
     // Objeto para acceder a las herramientas por nombre
     const tools = {
         rectangle: new RectangleTool(ctx, fillColor, selectedColor, brushWidth),
@@ -379,7 +424,8 @@ JAVASCRIPT:document.addEventListener("DOMContentLoaded", function () {
         circulo: new CirculoTool(ctx, fillColor, selectedColor, brushWidth),
         te: new TeTool(ctx, fillColor, selectedColor, brushWidth),
         ele: new EleTool(ctx, fillColor, selectedColor, brushWidth),
-        cuadradovigas: new CuadradoVigasTool(ctx, fillColor, selectedColor, brushWidth)
+        cuadradovigas: new CuadradoVigasTool(ctx, fillColor, selectedColor, brushWidth),
+        cuadradozapata: new CuadradoZapataTool(ctx, fillColor, selectedColor, brushWidth),
     };
 
     function redrawAllShapes() {
