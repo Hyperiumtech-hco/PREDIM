@@ -1,852 +1,284 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Proyecto Pavco</title>
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.min.css"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      /* Static Section (.col-md-12) */
-      .col-md-12 {
-        height: 150px;
-        /* Set a fixed height for static behavior */
-        overflow: hidden;
-        /* Hide any content that overflows */
-      }
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.min.css"
+/>
+<style>
+  /* Static Section (.col-md-12) */
+  .col-md-12 {
+    height: 150px;
+    /* Set a fixed height for static behavior */
+    overflow: hidden;
+    /* Hide any content that overflows */
+  }
 
-      /* Scrollable Section (.drawing-board.col-md-12) */
-      .drawing-board.col-md-12 {
-        height: 500px;
-        /* Set a desired height for the scrollable area */
-        width: 600px;
-        overflow-y: auto;
-        /* Enable vertical scrolling */
-        overflow-x: auto;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="content-wrapper">
-      <div class="container-fluid">
-        <div class="row">
-          <section class="col-md-12">
-            <div class="card">
-              <div class="card-header p-2">
-                <ul class="nav nav-tabs">
-                  <li class="nav-item">
-                    <a
-                      class="nav-link active"
-                      href="#archivo"
-                      data-toggle="tab"
-                    >
-                      <i class="ri-file-add-line"></i> Archivo
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#columnas" data-toggle="tab">
-                      <i class="ri-layout-column-line"></i> Columnas
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#vigas" data-toggle="tab">
-                      <i class="ri-safe-2-line"></i> Vigas
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#zapatas" data-toggle="tab">
-                      <i class="ri-side-bar-fill"></i> Zapata
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#lozas" data-toggle="tab">
-                      <i class="ri-layout-4-fill"></i> Loza
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#ajustes" data-toggle="tab">
-                      <i class="ri-settings-5-fill"></i> Ajustes
-                    </a>
-                  </li>
-                </ul>
+  /* Scrollable Section (.drawing-board.col-md-12) */
+  .drawing-board.col-md-12 {
+    height: 500px;
+    /* Set a desired height for the scrollable area */
+    width: 1200px;
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+    overflow-x: auto;
+  }
+</style>
+<div class="py-5">
+  <div class="w-full">
+    <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+      <h3
+        class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4"
+      ></h3>
+      <div class="overflow-x-auto">
+        <div class="border-b border-gray-200 dark:border-gray-700 mb-4">
+          <ul
+            class="flex flex-wrap -mb-px"
+            id="myTab"
+            data-tabs-toggle="#myTabContent"
+            role="tablist"
+          >
+            <li class="mr-2" role="presentation">
+              <button
+                class="inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300 active"
+                id="profile-tab"
+                data-tabs-target="#profile"
+                type="button"
+                role="tab"
+                aria-controls="profile"
+                aria-selected="true"
+              >
+                Archivo
+              </button>
+            </li>
+            <li class="mr-2" role="presentation">
+              <button
+                class="inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300"
+                id="dashboard-tab"
+                data-tabs-target="#dashboard"
+                type="button"
+                role="tab"
+                aria-controls="dashboard"
+                aria-selected="false"
+              >
+                Columnas
+              </button>
+            </li>
+            <li class="mr-2" role="presentation">
+              <button
+                class="inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300"
+                id="settings-tab"
+                data-tabs-target="#settings"
+                type="button"
+                role="tab"
+                aria-controls="settings"
+                aria-selected="false"
+              >
+                Vigas
+              </button>
+            </li>
+            <li role="presentation">
+              <button
+                class="inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300"
+                id="contacts-tab"
+                data-tabs-target="#contacts"
+                type="button"
+                role="tab"
+                aria-controls="contacts"
+                aria-selected="false"
+              >
+                Zapata
+              </button>
+            </li>
+            <li role="presentation">
+              <button
+                class="inline-block text-gray-500 hover:text-gray-600 hover:border-gray-300 rounded-t-lg py-4 px-4 text-sm font-medium text-center border-transparent border-b-2 dark:text-gray-400 dark:hover:text-gray-300"
+                id="losas-tab"
+                data-tabs-target="#losas"
+                type="button"
+                role="tab"
+                aria-controls="losas"
+                aria-selected="false"
+              >
+                Lozas
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div id="myTabContent">
+          <div
+            class="bg-gray-50 p-4 rounded-lg dark:bg-gray-800"
+            id="profile"
+            role="tabpanel"
+            aria-labelledby="profile-tab"
+          >
+            <div class="grid grid-cols-4 gap-4">
+              <div>
+                <button class="btn create-new">
+                  <i class="ri-file-pdf-2-line"></i> Nuevo
+                </button>
               </div>
-              <div class="card-body">
-                <div class="tab-content">
-                  <div class="tab-pane active" id="archivo">
-                    <div class="row">
-
-                      <!----Opcionews guardar y otros-->
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12 py-2">
-                        <div
-                          class="card"
-                          style="margin-left: -1.2rem; margin-top: -1.7rem"
-                        >
-                          <div class="card-body d-flex justify-content-around">
-                            <button class="btn create-new">
-                              <i class="ri-file-pdf-2-line"></i> Nuevo
-                            </button>
-                            <button class="btn save-img">
-                              <i class="ri-save-line"></i> Guardar
-                            </button>
-                            <button class="btn clear-canvas">
-                              <i class="ri-delete-bin-6-line"></i> Eliminar
-                            </button>
-                            <div class="">
-                              <label for="upload-pdf" class="btn upload-label">
-                                <i class="ri-chat-upload-line"></i> Cargar
-                              </label>
-                              <input
-                                type="file"
-                                id="upload-pdf"
-                                accept=".pdf"
-                                style="display: none"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- secciones por definir -->
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12 py-2"></div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12"></div>
-                      <div class="col-lg-3 col-md-3 col-sm-6 col-12 py-2"></div>
-                    </div>
-                  </div>
-
-                  <!---Aqui empieza para la opcion columnas-->
-                  <div class="tab-pane" id="columnas">
-                    <div class="row">
-                      <!-- seccion herramientas -->
-                      <div
-                        class="col-lg-3 col-md-3 col-sm-6 col-12"
-                        style="
-                          margin-top: -1.2rem;
-                          margin-left: -1.2rem;
-                          font-size: x-small;
-                        "
-                      >
-                        <div class="card d-flex justify-content-around">
-                          <div class="col-12">
-                            <div
-                              class="card"
-                              style="width: 18rem; border-radius: 20px"
-                            >
-                              <div class="card-body">
-                                <p
-                                  class="card-text"
-                                  style="
-                                    position: absolute;
-                                    top: 0;
-                                    right: 0;
-                                    background-color: #f8f9fa;
-                                    padding: 0.5rem;
-                                  "
-                                >
-                                  Predimenci
-                                </p>
-                                <div class="body">
-                                  <div class="row">
-                                    <div class="col-2">
-                                      <button
-                                        class="btn btn-sm tool"
-                                        data-tool="rectangle"
-                                        title="Rectángulo"
-                                      >
-                                        <i class="ri-rectangle-line"></i>
-                                      </button>
-                                    </div>
-                                    <div class="col-2">
-                                      <button
-                                        class="btn btn-sm tool"
-                                        data-tool="cuadrado"
-                                        title="Cuadrado"
-                                      >
-                                        <i class="ri-square-line"></i>
-                                      </button>
-                                    </div>
-                                    <div class="col-2">
-                                      <button
-                                        class="btn btn-sm tool"
-                                        data-tool="circulo"
-                                        title="Círculo"
-                                      >
-                                        <i class="ri-circle-line"></i>
-                                      </button>
-                                    </div>
-                                    <div class="col-2">
-                                      <button
-                                        class="btn btn-sm tool"
-                                        data-tool="te"
-                                        title="Te"
-                                      >
-                                        <i class="ri-t-box-line"></i>
-                                      </button>
-                                    </div>
-                                    <div class="col-2">
-                                      <button
-                                        class="btn btn-sm tool"
-                                        data-tool="ele"
-                                        title="Ele"
-                                      >
-                                        <i class="ri-ruler-2-line"></i>
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- seccion colores y tamaño -->
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                          <div class="card d-flex justify-content-around">
-                            <div class="col-12">
-                              <div class="body">
-                                <div class="row">
-                                  <div class="col-2">
-                                    <button
-                                      type="button"
-                                      class="btn dropdown-toggle"
-                                      data-toggle="dropdown"
-                                    >
-                                      <i class="ri-list-unordered"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                      <input
-                                        type="range"
-                                        id="size-slider"
-                                        class="custom-range mt-3"
-                                        min="1"
-                                        max="30"
-                                        value="5"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div class="col-2">
-                                    <label
-                                      for="color-picker"
-                                      style="margin-top: 0.5rem"
-                                    >
-                                      <i class="ri-palette-line"></i>
-                                    </label>
-                                    <input
-                                      type="color"
-                                      id="color-picker"
-                                      class="form-control"
-                                      value="#000000"
-                                      style="display: none"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- seccion entradas -->
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                          <div class="d-flex justify-content-around">
-                            <div class="form-group row">
-                              <label
-                                for="npisos"
-                                class="col-sm-6 col-form-label"
-                                >Cantidad de pisos</label
-                              >
-                              <div class="col-sm-6">
-                                <input
-                                  type="number"
-                                  id="npisos"
-                                  class="form-control"
-                                  value="1"
-                                  min="1"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- seccion datos extras-leyendas -->
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                          <div class="card">
-                            <div id="legend"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!---Aqui termina la opcion columnas-->
-                  
-                  <!---Aqui empieza para la opcion vigas-->
-                  <div class="tab-pane" id="vigas">
-                    <div class="row">
-                      <!-- seccion herramientas -->
-                      <div
-                        class="col-lg-3 col-md-3 col-sm-6 col-12"
-                        style="
-                          margin-top: -1.2rem;
-                          margin-left: -1.2rem;
-                          font-size: x-small;
-                        "
-                      >
-                        <div class="card d-flex justify-content-around">
-                          <div class="col-12">
-                            <div
-                              class="card"
-                              style="width: 18rem; border-radius: 20px"
-                            >
-                              <div class="card-body">
-                                <p
-                                  class="card-text"
-                                  style="
-                                    position: absolute;
-                                    top: 0;
-                                    right: 0;
-                                    background-color: #f8f9fa;
-                                    padding: 0.5rem;
-                                  "
-                                >
-                                  Predimenci
-                                </p>
-                                <div class="body">
-                                  <div class="row">
-                                    <div class="col-2">
-                                      <button
-                                        class="btn btn-sm tool"
-                                        data-tool="cuadradovigas"
-                                        title="CuadradoVigas"
-                                      >
-                                        <i class="ri-square-line"></i>
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- seccion colores y tamaño -->
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                          <div class="card d-flex justify-content-around">
-                            <div class="col-12">
-                              <div class="body">
-                                <div class="row">
-                                  <div class="col-2">
-                                    <button
-                                      type="button"
-                                      class="btn dropdown-toggle"
-                                      data-toggle="dropdown"
-                                    >
-                                      <i class="ri-list-unordered"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                      <input
-                                        type="range"
-                                        id="size-slider"
-                                        class="custom-range mt-3"
-                                        min="1"
-                                        max="30"
-                                        value="5"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div class="col-2">
-                                    <label
-                                      for="color-picker"
-                                      style="margin-top: 0.5rem"
-                                    >
-                                      <i class="ri-palette-line"></i>
-                                    </label>
-                                    <input
-                                      type="color"
-                                      id="color-picker"
-                                      class="form-control"
-                                      value="#000000"
-                                      style="display: none"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- seccion entradas -->
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                          <div class="d-flex justify-content-around">
-                            <div class="form-group row">
-                              <label
-                                for="npisos"
-                                class="col-sm-6 col-form-label"
-                                >Cantidad de pisos</label
-                              >
-                              <div class="col-sm-6">
-                                <input
-                                  type="number"
-                                  id="npisos"
-                                  class="form-control"
-                                  value="1"
-                                  min="1"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- seccion datos extras-leyendas -->
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                          <div class="card">
-                            <div id="legend"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!---Aqui termina la opcion vigas-->
-
-                  <!---Aqui empieza para la opcion Zapata-->
-                 <div class="tab-pane" id="zapatas">
-                    <div class="row">
-                      <!-- seccion herramientas -->
-                      <div
-                        class="col-lg-3 col-md-3 col-sm-6 col-12"
-                        style="
-                          margin-top: -1.2rem;
-                          margin-left: -1.2rem;
-                          font-size: x-small;
-                        "
-                      >
-                        <div class="card d-flex justify-content-around">
-                          <div class="col-12">
-                            <div
-                              class="card"
-                              style="width: 18rem; border-radius: 20px"
-                            >
-                              <div class="card-body">
-                                <p
-                                  class="card-text"
-                                  style="
-                                    position: absolute;
-                                    top: 0;
-                                    right: 0;
-                                    background-color: #f8f9fa;
-                                    padding: 0.5rem;
-                                  "
-                                >
-                                  Predimenci
-                                </p>
-                                <div class="body">
-                                  <div class="row">
-                                    <div class="col-2">
-                                      <button
-                                        class="btn btn-sm tool"
-                                        data-tool="cuadradozapata"
-                                        title="CuadradoZapata"
-                                      >
-                                        <i class="ri-square-line"></i>
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- seccion colores y tamaño -->
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                          <div class="card d-flex justify-content-around">
-                            <div class="col-12">
-                              <div class="body">
-                                <div class="row">
-                                  <div class="col-2">
-                                    <button
-                                      type="button"
-                                      class="btn dropdown-toggle"
-                                      data-toggle="dropdown"
-                                    >
-                                      <i class="ri-list-unordered"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                      <input
-                                        type="range"
-                                        id="size-slider"
-                                        class="custom-range mt-3"
-                                        min="1"
-                                        max="30"
-                                        value="5"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div class="col-2">
-                                    <label
-                                      for="color-picker"
-                                      style="margin-top: 0.5rem"
-                                    >
-                                      <i class="ri-palette-line"></i>
-                                    </label>
-                                    <input
-                                      type="color"
-                                      id="color-picker"
-                                      class="form-control"
-                                      value="#000000"
-                                      style="display: none"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- seccion entradas -->
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                          <div class="d-flex justify-content-around">
-                            <div class="form-group row">
-                              <label
-                                for="npisos"
-                                class="col-sm-6 col-form-label"
-                                >Cantidad de pisos</label
-                              >
-                              <div class="col-sm-6">
-                                <input
-                                  type="number"
-                                  id="npisos"
-                                  class="form-control"
-                                  value="1"
-                                  min="1"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- seccion datos extras-leyendas -->
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                          <div class="card">
-                            <div id="legend"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-----Aqui termina la opcion zapata -->
-
-                  <!----Aqui empieza para la pestaña Loza-->
-                  <div class="tab-pane" id="lozas">
-                    <div class="row">
-                      <!-- seccion herramientas -->
-                      <div
-                        class="col-lg-3 col-md-3 col-sm-6 col-12"
-                        style="
-                          margin-top: -1.2rem;
-                          margin-left: -1.2rem;
-                          font-size: x-small;
-                        "
-                      >
-                        <div class="card d-flex justify-content-around">
-                          <div class="col-12">
-                            <div
-                              class="card"
-                              style="width: 18rem; border-radius: 20px"
-                            >
-                              <div class="card-body">
-                                <p
-                                  class="card-text"
-                                  style="
-                                    position: absolute;
-                                    top: 0;
-                                    right: 0;
-                                    background-color: #f8f9fa;
-                                    padding: 0.5rem;
-                                  "
-                                >
-                                  Predimenci
-                                </p>
-                                <div class="body">
-                                  <div class="row">
-                                    <div class="col-2">
-                                      <button
-                                        class="btn btn-sm tool"
-                                        data-tool="circulo"
-                                        title="Círculo"
-                                      >
-                                        <i class="ri-circle-line"></i>
-                                      </button>
-                                    </div>
-                                    <div class="col-2">
-                                      <button
-                                      class="btn btn-sm tool"
-                                      data-tool="Menu"
-                                      title="Menu"
-                                      >
-                                      <i class="ri-organization-chart"></i>
-                                    </button>
-                                    </div>
-                                    <div class="col-2">
-                                      <button
-                                      class="btn btn-sm tool"
-                                      data-tool="Zero"
-                                      title="Zero"
-                                      >
-                                      <i class="ri-creative-commons-zero-line"></i>
-                                    </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- seccion colores y tamaño -->
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                          <div class="card d-flex justify-content-around">
-                            <div class="col-12">
-                              <div class="body">
-                                <div class="row">
-                                  <div class="col-2">
-                                    <button
-                                      type="button"
-                                      class="btn dropdown-toggle"
-                                      data-toggle="dropdown"
-                                    >
-                                      <i class="ri-list-unordered"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                      <input
-                                        type="range"
-                                        id="size-slider"
-                                        class="custom-range mt-3"
-                                        min="1"
-                                        max="30"
-                                        value="5"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div class="col-2">
-                                    <label
-                                      for="color-picker"
-                                      style="margin-top: 0.5rem"
-                                    >
-                                      <i class="ri-palette-line"></i>
-                                    </label>
-                                    <input
-                                      type="color"
-                                      id="color-picker"
-                                      class="form-control"
-                                      value="#000000"
-                                      style="display: none"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- seccion entradas -->
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                          <div class="d-flex justify-content-around">
-                            <div class="form-group row">
-                              <label
-                                for="npisos"
-                                class="col-sm-6 col-form-label"
-                                >Cantidad de pisos</label
-                              >
-                              <div class="col-sm-6">
-                                <input
-                                  type="number"
-                                  id="npisos"
-                                  class="form-control"
-                                  value="1"
-                                  min="1"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- seccion datos extras-leyendas -->
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                          <div class="card">
-                            <div id="legend"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!----Aqui termina la pestaña Loza-->
-
-                  <!---Empieza Para la pestaña ajustes-->
-                  <div class="tab-pane" id="ajustes">
-                                      <div class="row">
-                                        <!-- seccion herramientas -->
-                                        <div
-                                          class="col-lg-3 col-md-3 col-sm-6 col-12"
-                                          style="
-                                            margin-top: -1.2rem;
-                                            margin-left: -1.2rem;
-                                            font-size: x-small;
-                                          "
-                                        >
-                                          <div class="card d-flex justify-content-around">
-                                            <div class="col-12">
-                                              <div
-                                                class="card"
-                                                style="width: 18rem; border-radius: 20px"
-                                              >
-                                                <div class="card-body">
-                                                  <p
-                                                    class="card-text"
-                                                    style="
-                                                      position: absolute;
-                                                      top: 0;
-                                                      right: 0;
-                                                      background-color: #f8f9fa;
-                                                      padding: 0.5rem;
-                                                    "
-                                                  >
-                                                    Predimenci
-                                                  </p>
-                                                  <div class="body">
-                                                    <div class="row">
-                                                      <div class="col-2">
-                                                        <button
-                                                          class="btn btn-sm tool"
-                                                          data-tool="cuadrado"
-                                                          title="Cuadrado"
-                                                        >
-                                                          <i class="ri-square-line"></i>
-                                                        </button>
-                                                      </div>
-                  
-                                                      <div class="col-2">
-                                                        <button
-                                                          class="btn btn-sm tool"
-                                                          data-tool="te"
-                                                          title="Te"
-                                                        >
-                                                          <i class="ri-t-box-line"></i>
-                                                        </button>
-                                                      </div>
-                                                      <div class="col-2">
-                                                        <button
-                                                          class="btn btn-sm tool"
-                                                          data-tool="ele"
-                                                          title="Ele"
-                                                        >
-                                                          <i class="ri-ruler-2-line"></i>
-                                                        </button>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <!-- seccion colores y tamaño -->
-                                          <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                                            <div class="card d-flex justify-content-around">
-                                              <div class="col-12">
-                                                <div class="body">
-                                                  <div class="row">
-                                                    <div class="col-2">
-                                                      <button
-                                                        type="button"
-                                                        class="btn dropdown-toggle"
-                                                        data-toggle="dropdown"
-                                                      >
-                                                        <i class="ri-list-unordered"></i>
-                                                      </button>
-                                                      <div class="dropdown-menu">
-                                                        <input
-                                                          type="range"
-                                                          id="size-slider"
-                                                          class="custom-range mt-3"
-                                                          min="1"
-                                                          max="30"
-                                                          value="5"
-                                                        />
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-2">
-                                                      <label
-                                                        for="color-picker"
-                                                        style="margin-top: 0.5rem"
-                                                      >
-                                                        <i class="ri-palette-line"></i>
-                                                      </label>
-                                                      <input
-                                                        type="color"
-                                                        id="color-picker"
-                                                        class="form-control"
-                                                        value="#000000"
-                                                        style="display: none"
-                                                      />
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <!-- seccion entradas -->
-                                          <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                                            <div class="d-flex justify-content-around">
-                                              <div class="form-group row">
-                                                <label
-                                                  for="npisos"
-                                                  class="col-sm-6 col-form-label"
-                                                  >Cantidad de pisos</label
-                                                >
-                                                <div class="col-sm-6">
-                                                  <input
-                                                    type="number"
-                                                    id="npisos"
-                                                    class="form-control"
-                                                    value="1"
-                                                    min="1"
-                                                  />
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <!-- seccion datos extras-leyendas -->
-                                          <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                                            <div class="card">
-                                              <div id="legend"></div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                  </div>
-                  <!---Aqui termina la opcion ajustes -->
-
-                  <div class="tab-pane" id="ajustes"></div>
-                  <div class="tab-pane" id="vigas"></div>
-                  <div class="tab-pane" id="zapatas"></div>
-                  <div class="tab-pane" id="lozas"></div>
+              <div>
+                <button class="btn save-img">
+                  <i class="ri-save-line"></i> Guardar
+                </button>
+              </div>
+              <div>
+                <button class="btn clear-canvas">
+                  <i class="ri-delete-bin-6-line"></i> Eliminar
+                </button>
+              </div>
+              <div>
+                <div class="">
+                  <label for="upload-pdf" class="btn upload-label">
+                    <i class="ri-chat-upload-line"></i> Cargar
+                  </label>
+                  <input
+                    type="file"
+                    id="upload-pdf"
+                    accept=".pdf"
+                    style="display: none"
+                  />
                 </div>
               </div>
             </div>
-          </section>
-          <section class="drawing-board col-md-12">
-            <canvas id="canvas" class="border"></canvas>
-          </section>
+          </div>
+          <div
+            class="bg-gray-50 p-4 rounded-lg dark:bg-gray-800 hidden"
+            id="dashboard"
+            role="tabpanel"
+            aria-labelledby="dashboard-tab"
+          >
+            <div class="grid grid-cols-10 gap-10">
+              <div>
+                <button
+                  class="btn btn-sm tool"
+                  data-tool="rectangle"
+                  title="Rectángulo"
+                >
+                  <i class="ri-rectangle-line"></i>
+                </button>
+              </div>
+              <div>
+                <button
+                  class="btn btn-sm tool"
+                  data-tool="cuadrado"
+                  title="Cuadrado"
+                >
+                  <i class="ri-square-line"></i>
+                </button>
+              </div>
+              <div>
+                <button
+                  class="btn btn-sm tool"
+                  data-tool="circulo"
+                  title="Círculo"
+                >
+                  <i class="ri-circle-line"></i>
+                </button>
+              </div>
+              <div>
+                <button class="btn btn-sm tool" data-tool="te" title="T">
+                  <i class="ri-t-box-line"></i>
+                </button>
+              </div>
+              <div>
+                <button class="btn btn-sm tool" data-tool="ele" title="T">
+                  <i class="ri-ruler-2-line"></i>
+                </button>
+              </div>
+              <div>
+                <label for="npisos" class="text-center col-sm-6 col-form-label"
+                  >Cantidad de pisos</label
+                >
+              </div>
+              <div>
+                <input
+                  type="number"
+                  id="npisos"
+                  class="form-control"
+                  value="1"
+                  min="1"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-gray-50 p-4 rounded-lg dark:bg-gray-800 hidden"
+            id="settings"
+            role="tabpanel"
+            aria-labelledby="settings-tab"
+          >
+            <div class="grid grid-cols-10 gap-10">
+              <div>
+                <button
+                  class="btn btn-sm tool"
+                  data-tool="cuadradovigas"
+                  title="Vigas"
+                >
+                  <i class="ri-t-box-line"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-gray-50 p-4 rounded-lg dark:bg-gray-800 hidden"
+            id="contacts"
+            role="tabpanel"
+            aria-labelledby="contacts-tab"
+          >
+            <div class="flex items-center">
+              <!-- Contenedor flex para alinear elementos -->
+              <button
+                class="btn btn-sm tool"
+                data-tool="cuadradozapata"
+                title="CuadradoZapata"
+              >
+                <i class="ri-square-line"></i>
+              </button>
+              <div class="ml-12">
+                <!-- Incremento mayor de margen izquierdo -->
+                <div>
+                  <label
+                    for="npisos"
+                    class="text-center col-sm-6 col-form-label"
+                    >X</label
+                  >
+                </div>
+                <div>
+                  <input
+                    type="number"
+                    id="Zpisos"
+                    class="form-control"
+                    value="1"
+                    min="1"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-gray-50 p-4 rounded-lg dark:bg-gray-800 hidden"
+            id="losas"
+            role="tabpanel"
+            aria-labelledby="losas-tab"
+          >
+            <button></button>
+          </div>
         </div>
+        <section class="drawing-board col-md-12">
+          <canvas id="canvas" class="border"></canvas>
+        </section>
       </div>
     </div>
+  </div>
+</div>
 
-    <!-- Bootstrap JS y dependencias opcionales -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <!-- PDF.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-    <!-- Tu archivo JavaScript personalizado -->
-    <script src="Predim.js"></script>
-  </body>
-</html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+<script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
+<script src="{{ asset('js/adm_predim_view.js') }}"></script>
+<link href="./output.css" rel="stylesheet" />
+<script src="Predim.js"></script>

@@ -1,4 +1,4 @@
-JAVASCRIPT:document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
     const colorPicker = document.getElementById("color-picker");
@@ -359,6 +359,7 @@ JAVASCRIPT:document.addEventListener("DOMContentLoaded", function () {
             const Ac = ((parseFloat(areaCm2) * parseFloat(npisos) * 1000) / (0.45 * 210)).toFixed(2);
             const areaText = `AT: ${areaCm2.toFixed(2)} m²`;
             const areaTextAC = `AC: ${Ac} cm²`;
+            //formula
             const AreaVigas = (Math.max(square.width, square.height) / 14).toFixed(2);
             const AreaCuadradoVigas = `L: ${AreaVigas} m²`;
             const textY = square.y + square.height / 2;
@@ -402,21 +403,17 @@ JAVASCRIPT:document.addEventListener("DOMContentLoaded", function () {
             const Ac = ((parseFloat(areaCm2) * parseFloat(npisos) * 1000) / (0.45 * 210)).toFixed(2);
             const areaText = `AT: ${areaCm2.toFixed(2)} m²`;
             const areaTextAC = `AC: ${Ac} cm²`;
-            const AreaEle = `AL: ${(Ac - 900 / 60).toFixed(2)} m²`;
+            ///Formula
             const AreaVigas = (Math.max(square.width, square.height) / 14).toFixed(2);
             const AreaCuadradoVigas = `L: ${AreaVigas} m²`;
-            
             const textY = square.y + square.height / 2;
             const textX = square.x + square.width / 2 - ctx.measureText(areaText).width / 2;
     
             this.drawText(square, areaText, areaTextAC, textY);
-            ctx.fillText(AreaEle, textX, textY + 20);
-            ctx.fillText(AreaCuadradoVigas, textX, textY + 30);
+            ctx.fillText(AreaCuadradoVigas, textX, textY + 20);
         }
         }
     
-
-
     // Objeto para acceder a las herramientas por nombre
     const tools = {
         rectangle: new RectangleTool(ctx, fillColor, selectedColor, brushWidth),
