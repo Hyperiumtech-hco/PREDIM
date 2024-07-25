@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const Acuadrado = areaCm2;
         const areaText = `AT: ${areaCm2.toFixed(2)} m²`;
         const areaTextAC = `AC: ${Ac} cm²`;
-        const areaTextACuadrado = `A□: ${Acuadrado.toFixed(2)} m²`;
+        const areaTextACuadrado = `A□: ${Acuadrado.toFixed(2)} cm`;
         const textY = square.y + square.height / 2;
         const textX = square.x + square.width / 2 - ctx.measureText(areaText).width / 2;
 
@@ -234,7 +234,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const Acuadrado = areaCm2;
             const areaText = `AT: ${areaCm2.toFixed(2)} m²`;
             const areaTextAC = `AC: ${Ac} cm²`;
-            const areaTextACuadrado = `A◯: ${Acuadrado.toFixed(2)} m²`;
+            const areaTextACuadrado = `R: ${Acuadrado.toFixed(2)} cm`;
             const textY = square.y + square.height / 2;
             const textX = square.x + square.width / 2 - ctx.measureText(areaText).width / 2;
 
@@ -359,9 +359,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const Ac = ((parseFloat(areaCm2) * parseFloat(npisos) * 1000) / (0.45 * 210)).toFixed(2);
             const areaText = `AT: ${areaCm2.toFixed(2)} m²`;
             const areaTextAC = `AC: ${Ac} cm²`;
-            //formula
             const AreaVigas = (Math.max(square.width, square.height) / 14).toFixed(2);
-            const AreaCuadradoVigas = `L: ${AreaVigas} m²`;
+            const AreaCuadradoVigas = `L: ${AreaVigas} cm`;
             const textY = square.y + square.height / 2;
             const textX = square.x + square.width / 2 - ctx.measureText(areaText).width / 2;
     
@@ -403,17 +402,64 @@ document.addEventListener("DOMContentLoaded", function () {
             const Ac = ((parseFloat(areaCm2) * parseFloat(npisos) * 1000) / (0.45 * 210)).toFixed(2);
             const areaText = `AT: ${areaCm2.toFixed(2)} m²`;
             const areaTextAC = `AC: ${Ac} cm²`;
-            ///Formula
-            const AreaVigas = (Math.max(square.width, square.height) / 14).toFixed(2);
-            const AreaCuadradoVigas = `L: ${AreaVigas} m²`;
+            
+            const AreaZapata = Ac / 25; // Corrección: usar Ac directamente en el cálculo
+            const Az = `A⫠ ${AreaZapata.toFixed(2)} m²`; // Asegúrate de formatear correctamente el resultado
+            
+            const textY = square.y + square.height / 2;
+            const textX = square.x + square.width / 2 - ctx.measureText(areaText).width / 2;
+            
+            this.drawText(square, areaText, areaTextAC, textY);
+            ctx.fillText(Az, textX, textY + 25);
+            
+        }
+        }
+
+    //Seccion de pestaña Lozas y operacion 
+    class CuadradoLosasTool extends Tool {
+        draw(e) {
+            if (!isDrawing) return;
+            ctx.putImageData(snapshot, 0, 0);
+            const shape = {
+                x: prevMouseX,
+                y: prevMouseY,
+                width: e.offsetX - prevMouseX,
+                height: e.offsetY - prevMouseY,
+                color: this.selectedColor,
+                brushWidth: this.brushWidth,
+                fill: this.fillColor.checked
+            };
+            this.drawCuadradoLosas(shape);
+        }
+    
+        drawCuadradoLosas(square) {
+            ctx.beginPath();
+            ctx.rect(square.x, square.y, square.width, square.height);
+            ctx.lineWidth = square.brushWidth;
+            ctx.strokeStyle = square.color;
+            ctx.stroke();
+            if (square.fill) {
+                ctx.fillStyle = square.color;
+                ctx.fill();
+            }
+    
+            const areaCm2 = this.calculateArea(square);
+            const npisos = npisosInput.value;
+            const Ac = ((parseFloat(areaCm2) * parseFloat(npisos) * 1000) / (0.45 * 210)).toFixed(2);
+            const areaText = `AT: ${areaCm2.toFixed(2)} m²`;
+            const areaTextAC = `AC: ${Ac} cm²`;
+            //formula
+            const AreaLosas = (Math.max(square.width, square.height) / 25).toFixed(2);
+            const AreaCuadradoLosas = `A⨽: ${AreaLosas} m²`;
             const textY = square.y + square.height / 2;
             const textX = square.x + square.width / 2 - ctx.measureText(areaText).width / 2;
     
             this.drawText(square, areaText, areaTextAC, textY);
-            ctx.fillText(AreaCuadradoVigas, textX, textY + 20);
+            ctx.fillText(AreaCuadradoLosas, textX, textY + 20);
         }
-        }
-    
+
+    }
+
     // Objeto para acceder a las herramientas por nombre
     const tools = {
         rectangle: new RectangleTool(ctx, fillColor, selectedColor, brushWidth),
@@ -423,8 +469,10 @@ document.addEventListener("DOMContentLoaded", function () {
         ele: new EleTool(ctx, fillColor, selectedColor, brushWidth),
         cuadradovigas: new CuadradoVigasTool(ctx, fillColor, selectedColor, brushWidth),
         cuadradozapata: new CuadradoZapataTool(ctx, fillColor, selectedColor, brushWidth),
+        cuadradolosas: new CuadradoLosasTool(ctx. fillColor, selectedColor, brushWidth),
     };
 
+    //funcion para redibujar  todas las formas 
     function redrawAllShapes() {
         if (pdfSnapshot) {
             ctx.putImageData(pdfSnapshot, 0, 0);
@@ -468,6 +516,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    // Slecciona,os el color 
     colorPicker.addEventListener("change", (e) => {
         selectedColor = e.target.value;
     });
